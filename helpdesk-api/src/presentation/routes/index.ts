@@ -5,6 +5,7 @@ import cannedResponseRoutes from './cannedResponseRoutes';
 import roleRoutes from './roleRoutes';
 import commentRoutes from './commentRoutes';
 import verificationRoutes from './verificationRoutes';
+import ticketRoutes from './ticketRoutes';
 // Import other routes as they are implemented
 
 const router = Router();
@@ -15,6 +16,7 @@ router.use('/canned-responses', cannedResponseRoutes);
 router.use('/roles', roleRoutes);
 router.use('/comments', commentRoutes);
 router.use('/verifications', verificationRoutes);
+router.use('/tickets', ticketRoutes);
 // Add other routes here as they are implemented
 
 export default router;
