@@ -1,0 +1,68 @@
+_format_version: "2.1"
+_transform: true
+
+services:
+  # Admin UI Service
+  - name: admin-ui
+    url: http://admin-ui:3000
+    routes:
+      - name: admin-ui-route
+        paths:
+          - /admin
+        strip_path: true
+
+  # API Service
+  - name: api
+    url: http://nginx:80
+    routes:
+      - name: api-route
+        paths:
+          - /api
+        strip_path: true
+    plugins:
+      - name: cors
+        config:
+          origins:
+            - "*"
+          methods:
+            - GET
+            - POST
+            - PUT
+            - DELETE
+            - OPTIONS
+          headers:
+            - Accept
+            - Accept-Version
+            - Content-Length
+            - Content-MD5
+            - Content-Type
+            - Date
+            - X-Auth-Token
+            - Authorization
+          credentials: true
+          max_age: 3600
+      - name: jwt
+        config:
+          claims_to_verify:
+            - exp
+          key_claim_name: kid
+          secret_is_base64: false
+          run_on_preflight: false
+          uri_param_names:
+            - jwt
+          cookie_names: []
+          header_names:
+            - Authorization
+
+consumers:
+  - username: admin-ui
+    jwt_secrets:
+      - algorithm: HS256
+        key: admin-ui-key
+        secret: admin-ui-secret
+
+  - username: flutter-app
+    jwt_secrets:
+      - algorithm: HS256
+        key: flutter-app-key
+        secret: flutter-app-secret
