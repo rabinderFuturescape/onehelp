@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { FormField, FormLabel, Input, Select } from '@/components/ui/Form';
@@ -91,7 +93,7 @@ export function FilterPanel<T extends Record<string, any>>({
               {otherFilters.map((option) => {
                 const colSpan = option.gridSpan || 1;
                 const colSpanClass = colSpan > 1 ? `sm:col-span-${colSpan}` : '';
-                
+
                 if (option.type === 'text' || option.type === 'date') {
                   return (
                     <FormField key={option.id} className={colSpanClass}>
@@ -128,7 +130,7 @@ export function FilterPanel<T extends Record<string, any>>({
                 }
                 return null;
               })}
-              
+
               {checkboxFilters.length > 0 && (
                 <div className="flex items-center space-x-4 pt-8 lg:col-span-2">
                   {checkboxFilters.map((option) => (

@@ -23,9 +23,18 @@ export const TicketTable: React.FC<TicketTableProps> = ({
       className: 'py-4 pl-4 pr-3 text-sm font-medium text-blue-600 sm:pl-6 w-36',
       render: (ticket) => (
         <div className="flex flex-col space-y-1 w-full">
-          <Link href={`/tickets/${ticket.id}`} className="text-blue-600 hover:text-blue-800">
-            {ticket.ticketNumber}
-          </Link>
+          <div className="flex items-center space-x-2">
+            <Link href={`/tickets/${ticket.id}`} className="text-blue-600 hover:text-blue-800">
+              {ticket.ticketNumber}
+            </Link>
+            <Link
+              href={`/tickets/enhanced/${ticket.id}`}
+              className="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded hover:bg-blue-200"
+              title="View enhanced ticket detail"
+            >
+              New UI
+            </Link>
+          </div>
           <div className="flex flex-wrap gap-1 mt-1">
             {ticket.isOverdue && (
               <span className="inline-block px-1.5 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800 whitespace-nowrap">

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { Fragment, useState } from 'react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/Dialog';
 import { Transition } from '@headlessui/react';
@@ -74,7 +76,7 @@ export const MemberSearchDialog: React.FC<MemberSearchDialogProps> = ({
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={onClose}>
+      <Dialog as="div" className="relative z-10" open={isOpen} onClose={onClose}>
         <DialogContent className="sm:max-w-2xl" onClose={onClose}>
           <DialogTitle>Search Member or Unit</DialogTitle>
           <div className="mt-4">

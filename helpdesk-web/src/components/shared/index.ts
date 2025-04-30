@@ -3,6 +3,10 @@ export * from './DeleteConfirmationDialog';
 export * from './FilterPanel';
 export * from './MemberSearchDialog';
 export * from './EntityForm';
+export * from '../comments/CommentList';
+export * from '../comments/CommentForm';
+export * from '../comments/CommentItem';
+export * from '../tickets/TicketActions';
 
 // New shared components
 export { default as Button } from './Button';

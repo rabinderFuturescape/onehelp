@@ -13,6 +13,10 @@ import { PencilIcon, ArrowLeftIcon, PaperClipIcon, ClockIcon, ExclamationCircleI
 import Link from 'next/link';
 import MainLayout from '@/components/layout/MainLayout';
 import { Card } from '@/components/shared';
+import { CommentList } from '@/components/comments/CommentList';
+import { TicketActions } from '@/components/tickets/TicketActions';
+import { JobCardList } from '@/components/tickets/JobCard';
+import { TicketCommunication } from '@/components/tickets/TicketCommunication';
 
 export default function TicketDetailClient({ id }: { id: string }) {
   const { isAuthenticated, user } = useAuthStore();
@@ -265,6 +269,40 @@ export default function TicketDetailClient({ id }: { id: string }) {
           <div className="bg-red-50 border border-red-200 rounded-md p-4 text-red-700">
             Ticket not found
           </div>
+        )}
+
+        {/* Admin Actions */}
+        {ticket && (user?.role === 'admin' || user?.role === 'agent' || user?.role === 'manager') && (
+          <TicketActions
+            ticket={ticket}
+            onTicketUpdated={() => {
+              // Refetch ticket data when updated
+            }}
+          />
+        )}
+
+        {/* Comments Section */}
+        {ticket && (
+          <Card
+            title="Comments and Activity"
+            headerClassName="px-6 py-5"
+            bodyClassName="p-6"
+            className="shadow"
+          >
+            <CommentList ticketId={ticket.id} />
+          </Card>
+        )}
+
+        {/* Job Cards Section */}
+        {ticket && (
+          <Card
+            title="Job Cards"
+            headerClassName="px-6 py-5"
+            bodyClassName="p-6"
+            className="shadow mt-6"
+          >
+            <JobCardList ticketId={ticket.id} ticketNumber={ticket.ticketNumber} />
+          </Card>
         )}
 
         {/* Edit Ticket Dialog */}

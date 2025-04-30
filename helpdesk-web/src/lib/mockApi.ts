@@ -7,6 +7,7 @@ import {
   mockReport,
   mockMembers,
   mockTickets,
+  mockComments,
 } from './mockData';
 import { HelpTopic, HelpTopicInput } from '@/types/help-topics';
 import { CannedResponse, CannedResponseInput } from '@/types/canned-responses';
@@ -14,6 +15,7 @@ import { Complaint, ComplaintInput, Member } from '@/types/complaints';
 import { EscalationRule, EscalationRuleInput } from '@/types/escalation';
 import { ReportFilters, ReportResponse } from '@/types/reports';
 import { Ticket, TicketInput } from '@/types/tickets';
+import { Comment, CommentInput } from '@/types/comments';
 
 // Helper function to generate a random ID
 const generateId = () => Math.random().toString(36).substring(2, 15);
@@ -473,6 +475,69 @@ const mockApi = {
       throw new Error('Ticket not found');
     }
     mockTickets.splice(index, 1);
+  },
+
+  // Comments
+  getTicketComments: async (ticketId: string): Promise<Comment[]> => {
+    await delay(500);
+    return mockComments.filter(c => c.ticketId === ticketId);
+  },
+
+  createComment: async (ticketId: string, comment: CommentInput): Promise<Comment> => {
+    await delay(700);
+    const ticket = mockTickets.find(t => t.id === ticketId);
+    if (!ticket) {
+      throw new Error('Ticket not found');
+    }
+
+    // Use the current user from auth store (in a real app)
+    // For mock, we'll use a hardcoded user
+    const user = {
+      id: 'current-user',
+      name: 'Current User',
+      email: 'user@example.com',
+      avatar: 'https://ui-avatars.com/api/?name=Current+User',
+      role: 'agent',
+    };
+
+    const newComment: Comment = {
+      ...comment,
+      id: generateId(),
+      ticketId,
+      userId: user.id,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      user,
+    };
+
+    mockComments.push(newComment);
+    return { ...newComment };
+  },
+
+  updateComment: async (id: string, comment: Partial<CommentInput>): Promise<Comment> => {
+    await delay(600);
+    const index = mockComments.findIndex(c => c.id === id);
+    if (index === -1) {
+      throw new Error('Comment not found');
+    }
+
+    const updatedComment = {
+      ...mockComments[index],
+      ...comment,
+      updatedAt: new Date().toISOString(),
+    };
+
+    mockComments[index] = updatedComment;
+    return { ...updatedComment };
+  },
+
+  deleteComment: async (id: string): Promise<void> => {
+    await delay(500);
+    const index = mockComments.findIndex(c => c.id === id);
+    if (index === -1) {
+      throw new Error('Comment not found');
+    }
+    mockComments.splice(index, 1);
   },
 };
 

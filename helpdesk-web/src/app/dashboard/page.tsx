@@ -98,6 +98,22 @@ export default function DashboardPage() {
           </Link>
         </div>
 
+        {/* Enhanced UI Demo */}
+        <div className="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg shadow-sm border border-blue-100">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-medium text-gray-900">Try Our New Enhanced UI</h2>
+            <Link
+              href="/tickets/enhanced/1"
+              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200 text-sm font-medium"
+            >
+              View Demo
+            </Link>
+          </div>
+          <p className="mt-2 text-sm text-gray-600">
+            Experience our new ticket detail interface with improved layout, tabbed actions, and job card management.
+          </p>
+        </div>
+
         {/* Recent Activity */}
         <div className="mt-8">
           <div className="flex items-center justify-between">

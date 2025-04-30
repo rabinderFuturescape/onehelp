@@ -4,6 +4,7 @@ import { Complaint } from '@/types/complaints';
 import { Role } from '@/types/escalation';
 import { ReportResponse } from '@/types/reports';
 import { Ticket } from '@/types/tickets';
+import { Comment } from '@/types/comments';
 
 // Mock Roles
 export const mockRoles: Role[] = [
@@ -472,6 +473,137 @@ export const mockEscalationRules = [
     ],
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
+  },
+];
+
+// Mock Comments
+export const mockComments: Comment[] = [
+  {
+    id: '1',
+    ticketId: '1',
+    userId: 'agent-1',
+    content: '<p>I\'ve looked into your account and I can see that there might be an issue with your credentials. Could you please try clearing your browser cache and cookies, then try logging in again?</p>',
+    isInternal: false,
+    createdAt: new Date(Date.now() - 23 * 60 * 60 * 1000).toISOString(),
+    updatedAt: new Date(Date.now() - 23 * 60 * 60 * 1000).toISOString(),
+    user: {
+      id: 'agent-1',
+      name: 'Jane Smith',
+      email: 'jane.smith@example.com',
+      avatar: 'https://ui-avatars.com/api/?name=Jane+Smith',
+      role: 'agent',
+    },
+    attachments: [],
+  },
+  {
+    id: '2',
+    ticketId: '1',
+    userId: 'customer-1',
+    content: '<p>I tried clearing my cache and cookies but I\'m still having the same issue. I get an error message saying "Invalid credentials" even though I\'m sure my password is correct.</p>',
+    isInternal: false,
+    createdAt: new Date(Date.now() - 22 * 60 * 60 * 1000).toISOString(),
+    updatedAt: new Date(Date.now() - 22 * 60 * 60 * 1000).toISOString(),
+    user: {
+      id: 'customer-1',
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      avatar: 'https://ui-avatars.com/api/?name=John+Doe',
+      role: 'customer',
+    },
+    attachments: [
+      {
+        id: '1',
+        fileName: 'error_screenshot.png',
+        fileSize: 256000,
+        fileType: 'image/png',
+        url: '#',
+      },
+    ],
+  },
+  {
+    id: '3',
+    ticketId: '1',
+    userId: 'agent-1',
+    content: '<p>Let me escalate this to our technical team for further investigation. They will look into your account settings.</p>',
+    isInternal: false,
+    createdAt: new Date(Date.now() - 20 * 60 * 60 * 1000).toISOString(),
+    updatedAt: new Date(Date.now() - 20 * 60 * 60 * 1000).toISOString(),
+    user: {
+      id: 'agent-1',
+      name: 'Jane Smith',
+      email: 'jane.smith@example.com',
+      avatar: 'https://ui-avatars.com/api/?name=Jane+Smith',
+      role: 'agent',
+    },
+    attachments: [],
+  },
+  {
+    id: '4',
+    ticketId: '1',
+    userId: 'agent-1',
+    content: '<p>I\'ve checked with the technical team and it appears there might be an issue with your account permissions. Let\'s try resetting your account.</p>',
+    isInternal: true,
+    createdAt: new Date(Date.now() - 18 * 60 * 60 * 1000).toISOString(),
+    updatedAt: new Date(Date.now() - 18 * 60 * 60 * 1000).toISOString(),
+    user: {
+      id: 'agent-1',
+      name: 'Jane Smith',
+      email: 'jane.smith@example.com',
+      avatar: 'https://ui-avatars.com/api/?name=Jane+Smith',
+      role: 'agent',
+    },
+    attachments: [],
+  },
+  {
+    id: '5',
+    ticketId: '2',
+    userId: 'agent-2',
+    content: '<p>I\'ve reviewed your billing statement and I can see the discrepancy you mentioned. We\'ll need to investigate this further with our billing department.</p>',
+    isInternal: false,
+    createdAt: new Date(Date.now() - 10 * 60 * 60 * 1000).toISOString(),
+    updatedAt: new Date(Date.now() - 10 * 60 * 60 * 1000).toISOString(),
+    user: {
+      id: 'agent-2',
+      name: 'Mike Johnson',
+      email: 'mike.johnson@example.com',
+      avatar: 'https://ui-avatars.com/api/?name=Mike+Johnson',
+      role: 'manager',
+    },
+    attachments: [],
+  },
+  {
+    id: '6',
+    ticketId: '3',
+    userId: 'agent-1',
+    content: '<p>I\'ve reviewed the error logs you sent. It seems there might be a compatibility issue with your operating system. Could you please let me know which OS version you\'re using?</p>',
+    isInternal: false,
+    createdAt: new Date(Date.now() - 36 * 60 * 60 * 1000).toISOString(),
+    updatedAt: new Date(Date.now() - 36 * 60 * 60 * 1000).toISOString(),
+    user: {
+      id: 'agent-1',
+      name: 'Jane Smith',
+      email: 'jane.smith@example.com',
+      avatar: 'https://ui-avatars.com/api/?name=Jane+Smith',
+      role: 'agent',
+    },
+    attachments: [],
+  },
+  {
+    id: '7',
+    ticketId: '3',
+    userId: 'customer-3',
+    content: '<p>I\'m using Windows 11, version 22H2. I\'ve also tried running the application in compatibility mode but it still crashes.</p>',
+    isInternal: false,
+    createdAt: new Date(Date.now() - 30 * 60 * 60 * 1000).toISOString(),
+    updatedAt: new Date(Date.now() - 30 * 60 * 60 * 1000).toISOString(),
+    user: {
+      id: 'customer-3',
+      name: 'Bob Johnson',
+      email: 'bob.johnson@example.com',
+      avatar: 'https://ui-avatars.com/api/?name=Bob+Johnson',
+      role: 'customer',
+    },
+    attachments: [],
   },
 ];
 
