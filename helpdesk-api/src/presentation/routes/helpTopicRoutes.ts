@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { HelpTopicController } from '../controllers/HelpTopicController';
+import { createHelpTopicController } from '../controllers/HelpTopicController';
 import { GetHelpTopicsUseCase } from '../../application/usecases/helpTopics/GetHelpTopicsUseCase';
 import { GetHelpTopicByIdUseCase } from '../../application/usecases/helpTopics/GetHelpTopicByIdUseCase';
 import { CreateHelpTopicUseCase } from '../../application/usecases/helpTopics/CreateHelpTopicUseCase';
@@ -20,13 +20,13 @@ const createHelpTopicUseCase = new CreateHelpTopicUseCase(helpTopicRepository);
 const updateHelpTopicUseCase = new UpdateHelpTopicUseCase(helpTopicRepository);
 const deleteHelpTopicUseCase = new DeleteHelpTopicUseCase(helpTopicRepository);
 
-// Controller
-const helpTopicController = new HelpTopicController(
+// Create controller functions
+const helpTopicController = createHelpTopicController(
   getHelpTopicsUseCase,
   getHelpTopicByIdUseCase,
   createHelpTopicUseCase,
   updateHelpTopicUseCase,
-  deleteHelpTopicUseCase,
+  deleteHelpTopicUseCase
 );
 
 // Routes
